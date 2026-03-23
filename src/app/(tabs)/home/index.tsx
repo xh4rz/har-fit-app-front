@@ -1,6 +1,5 @@
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useAuthStore } from '@/modules/auth/store/useAuthStore';
-import { Link } from 'expo-router';
 
 export default function HomeScreen() {
 	const { user } = useAuthStore();
@@ -14,10 +13,6 @@ export default function HomeScreen() {
 				<Text className="text-primary text-2xl font-bold">
 					{user?.fullName}
 				</Text>
-
-				<Link href="/home/home-nested" push asChild>
-					<Button title="Home Nested" />
-				</Link>
 			</View>
 		</View>
 	);

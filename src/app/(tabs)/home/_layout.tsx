@@ -22,10 +22,6 @@ export default function HomeLayout() {
 				name="index"
 				options={{ headerShown: true, title: 'Home' }}
 			/>
-			<Stack.Screen
-				name="home-nested"
-				options={{ headerShown: true, title: 'Home Nested' }}
-			/>
 		</Stack>
 	);
 }
