@@ -15,8 +15,6 @@ export const AppVersion = ({
 
 	const build = Application.nativeBuildVersion;
 
-	console.log({ build });
-
 	return (
 		<Text className={`text-primary-theme text-center ${className}`}>
 			v{version}

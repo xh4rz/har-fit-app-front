@@ -6,14 +6,16 @@ import { useColorScheme } from 'nativewind';
 export type ThemeName = 'light' | 'dark' | 'system';
 
 interface ThemeContextType {
-	theme: ThemeName;
+	theme: 'light' | 'dark';
+	selectedTheme: ThemeName;
 	setTheme: (theme: ThemeName) => void;
 }
 
 const THEME_STORAGE_KEY = '@app_theme';
 
 export const ThemeContext = createContext<ThemeContextType>({
-	theme: 'system',
+	theme: 'dark',
+	selectedTheme: 'system',
 	setTheme: () => {}
 });
 
@@ -21,6 +23,9 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 	const { colorScheme, setColorScheme } = useColorScheme();
 
 	const [selectedTheme, setSelectedTheme] = useState<ThemeName>('system');
+
+	const theme =
+		selectedTheme === 'system' ? (colorScheme ?? 'dark') : selectedTheme;
 
 	useEffect(() => {
 		loadSavedTheme();
@@ -61,7 +66,8 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 	return (
 		<ThemeContext.Provider
 			value={{
-				theme: selectedTheme,
+				theme,
+				selectedTheme,
 				setTheme
 			}}
 		>
