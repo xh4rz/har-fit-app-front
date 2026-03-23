@@ -30,10 +30,10 @@ export const Modal = ({
 			backdropColor={'red'}
 		>
 			<Pressable
-				className="flex-1 justify-center items-center bg-black/60"
+				className="flex-1 justify-center items-center bg-black/60 px-4"
 				onPress={() => setVisible(false)}
 			>
-				<Pressable className="bg-zinc-800 rounded-2xl p-6 max-w-lg">
+				<Pressable className="bg-zinc-800 rounded-2xl p-6 w-full">
 					<Text className="text-lg font-bold text-center mb-2">{title}</Text>
 					<Text className="text-sm text-center mb-6">
 						{description}{' '}

@@ -302,7 +302,7 @@ export const ExerciseForm = ({ defaultValues, mode }: Props) => {
 			<BottomSheetVideoOptions
 				show={showModalOptionsVideo}
 				setShow={setShowModalOptionsVideo}
-				disabledVideo={!file?.uri}
+				disabledVideo={!file?.uri || !!errors.file?.message}
 				selectVideo={selectVideo}
 				captureVideo={captureVideo}
 				removeVideo={removeVideo}
