@@ -8,3 +8,4 @@ export * from './Image';
 export * from './Checkbox';
 export * from './Modal';
 export * from './AppVersion';
+export * from './Loading';

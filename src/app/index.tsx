@@ -10,7 +10,7 @@ export default function WelcomeScreen() {
 			</Text>
 
 			<Text className="text-4xl mb-12 text-center font-bold text-primary">
-				HaroldFit<Text className="text-secondary">App</Text>
+				HarFit<Text className="text-secondary">App</Text>
 			</Text>
 
 			<Text className="text-base text-center mb-10 leading-6 text-primary-theme">

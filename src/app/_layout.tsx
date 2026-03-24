@@ -1,5 +1,5 @@
-import React from 'react';
-import { Stack, usePathname, useRouter } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { SplashScreen, Stack, usePathname, useRouter } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 import { AppContextProvider } from '@/context/AppContext';
 import { useAuthStore } from '@/modules/auth/store/useAuthStore';
@@ -10,14 +10,36 @@ import '../../global.css';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SplashView } from '@/screens/SplashView';
+
+SplashScreen.preventAutoHideAsync();
+
+export default function AppLayout() {
+	const [isAppReady, setIsAppReady] = useState(false);
+
+	useEffect(() => {
+		SplashScreen.hide();
+	}, []);
+
+	if (!isAppReady) return <SplashView onFinish={() => setIsAppReady(true)} />;
+
+	return (
+		<AppContextProvider>
+			<SafeAreaProvider>
+				<GestureHandlerRootView style={{ flex: 1 }}>
+					<BottomSheetModalProvider>
+						<RootLayout />
+					</BottomSheetModalProvider>
+				</GestureHandlerRootView>
+			</SafeAreaProvider>
+		</AppContextProvider>
+	);
+}
 
 function RootLayout() {
 	const router = useRouter();
-
 	const pathname = usePathname();
-
 	const { isAuthenticated } = useAuthStore();
-
 	const theme = useThemeColors();
 
 	const handleBack = () => {
@@ -27,8 +49,6 @@ function RootLayout() {
 			router.back();
 		}
 	};
-
-	console.log({ pathname });
 
 	return (
 		<React.Fragment>
@@ -68,19 +88,5 @@ function RootLayout() {
 				</Stack.Protected>
 			</Stack>
 		</React.Fragment>
-	);
-}
-
-export default function AppLayout() {
-	return (
-		<AppContextProvider>
-			<SafeAreaProvider>
-				<GestureHandlerRootView style={{ flex: 1 }}>
-					<BottomSheetModalProvider>
-						<RootLayout />
-					</BottomSheetModalProvider>
-				</GestureHandlerRootView>
-			</SafeAreaProvider>
-		</AppContextProvider>
 	);
 }
