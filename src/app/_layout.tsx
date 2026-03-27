@@ -18,7 +18,7 @@ export default function AppLayout() {
 	const [isAppReady, setIsAppReady] = useState(false);
 
 	useEffect(() => {
-		SplashScreen.hide();
+		SplashScreen.hideAsync();
 	}, []);
 
 	if (!isAppReady) return <SplashView onFinish={() => setIsAppReady(true)} />;

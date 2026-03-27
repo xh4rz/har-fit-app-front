@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "my-first-app",
-    "slug": "my-first-app",
+    "name": "HarFit",
+    "slug": "har-fit-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/adaptive-icon.png",
-    "scheme": "myfirstapp",
+    "scheme": "harfitapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -21,7 +21,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.myfirstapp"
+      "package": "com.anonymous.harfitapp"
     },
     "web": {
       "bundler": "metro",

@@ -1,6 +1,6 @@
-## 🏋️ HaroldFit App
+## 🏋️ HarFit App
 
-HaroldFit es una aplicación de seguimiento de entrenamientos de gimnasio inspirada en Hevy.
+HarFit es una aplicación de seguimiento de entrenamientos de gimnasio inspirada en Hevy.
 
 La aplicación permite a los usuarios:
 
@@ -39,6 +39,7 @@ src/
  │   │   ├── services/
  │   │   ├── store/
  │   │   └── validation/
+ │   ├── exercise/
  │   └── routine/
  │
  ├── api/               # Configuración Axios

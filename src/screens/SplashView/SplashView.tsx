@@ -23,7 +23,7 @@ export const SplashView = ({ onFinish }: { onFinish: () => void }) => {
 				).start(() => resolve());
 			});
 
-			await delay(3000);
+			await delay(1000);
 
 			Animated.timing(containerOpacity, {
 				toValue: 0,
