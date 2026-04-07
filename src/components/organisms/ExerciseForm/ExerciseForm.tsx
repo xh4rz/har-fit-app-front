@@ -165,11 +165,16 @@ export const ExerciseForm = ({ defaultValues, mode }: Props) => {
 			const instructions = data.instruction.map((i) => i.text);
 			formData.append('instruction', JSON.stringify(instructions));
 
-			formData.append('file', {
-				uri: data.file.uri,
-				name: data.file.fileName,
-				type: data.file.mimeType
-			} as any);
+			const hasVideoChanged =
+				data.file?.uri && data.file.uri !== defaultValues?.file?.uri;
+
+			if (hasVideoChanged) {
+				formData.append('file', {
+					uri: data.file.uri,
+					name: data.file.fileName,
+					type: data.file.mimeType
+				} as any);
+			}
 
 			if (mode === 'create') {
 				await postExercise(formData);
