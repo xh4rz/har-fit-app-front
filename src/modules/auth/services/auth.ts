@@ -33,15 +33,3 @@ export const authRegister = async (
 		throw error;
 	}
 };
-
-// todo: hacer api en el backend
-export const authCheckStatus = async () => {
-	try {
-		const { data } = await axiosClient.get<Auth>('/auth/check-status');
-
-		return data;
-	} catch (error) {
-		console.error(error);
-		return null;
-	}
-};

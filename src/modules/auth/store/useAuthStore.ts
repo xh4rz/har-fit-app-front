@@ -1,33 +1,38 @@
 import { StorageAdapter } from '@/adapters/storage-adapter';
 import { User } from '@/infrastructure/interfaces';
 import { create } from 'zustand';
-import { authCheckStatus, authLogin, authRegister } from '../services/auth';
+import { authLogin, authRegister } from '../services/auth';
 
 export interface AuthStoreState {
 	isAuthenticated: boolean;
-	token: string;
+	accessToken: string;
 	user: User | null;
 	login: (email: string, password: string) => Promise<boolean>;
 	register: (name: string, email: string, password: string) => Promise<boolean>;
-	checkStatus: () => Promise<void>;
 	logout: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthStoreState>()((set, get) => ({
 	isAuthenticated: false,
-	token: '',
+	accessToken: '',
 	user: null,
 	login: async (email: string, password: string) => {
 		const resp = await authLogin(email, password);
 
 		if (!resp) {
-			set({ isAuthenticated: false, token: '', user: null });
+			set({ isAuthenticated: false, accessToken: '', user: null });
 			return false;
 		}
 
-		await StorageAdapter.setItem('token', resp.token);
+		await StorageAdapter.setItem('accessToken', resp.accessToken);
 
-		set({ isAuthenticated: true, token: resp.token, user: resp.user });
+		await StorageAdapter.setItem('refreshToken', resp.refreshToken);
+
+		set({
+			isAuthenticated: true,
+			accessToken: resp.accessToken,
+			user: resp.user
+		});
 
 		return true;
 	},
@@ -38,27 +43,24 @@ export const useAuthStore = create<AuthStoreState>()((set, get) => ({
 			return false;
 		}
 
-		await StorageAdapter.setItem('token', resp.token);
+		await StorageAdapter.setItem('accessToken', resp.accessToken);
 
-		set({ isAuthenticated: true, token: resp.token, user: resp.user });
+		await StorageAdapter.setItem('refreshToken', resp.refreshToken);
+
+		set({
+			isAuthenticated: true,
+			accessToken: resp.accessToken,
+			user: resp.user
+		});
 
 		return true;
 	},
-	checkStatus: async () => {
-		const resp = await authCheckStatus();
 
-		if (!resp) {
-			set({ isAuthenticated: false, token: '', user: null });
-			return;
-		}
-
-		await StorageAdapter.setItem('token', resp.token);
-
-		set({ isAuthenticated: true, token: resp.token, user: resp.user });
-	},
 	logout: async () => {
-		await StorageAdapter.removeItem('token');
+		await StorageAdapter.removeItem('accessToken');
 
-		set({ isAuthenticated: false, token: '', user: null });
+		await StorageAdapter.removeItem('refreshToken');
+
+		set({ isAuthenticated: false, accessToken: '', user: null });
 	}
 }));

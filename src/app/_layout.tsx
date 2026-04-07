@@ -11,6 +11,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { SplashView } from '@/screens/SplashView';
+import { StorageAdapter } from '@/adapters/storage-adapter';
+import { getUser } from '@/modules/auth/services/getUser';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -18,7 +20,26 @@ export default function AppLayout() {
 	const [isAppReady, setIsAppReady] = useState(false);
 
 	useEffect(() => {
-		SplashScreen.hideAsync();
+		const initAuth = async () => {
+			const accessToken = await StorageAdapter.getItem('accessToken');
+
+			try {
+				if (accessToken) {
+					const user = await getUser();
+
+					useAuthStore.setState({
+						isAuthenticated: true,
+						accessToken: accessToken,
+						user
+					});
+				}
+			} catch {
+			} finally {
+				SplashScreen.hideAsync();
+			}
+		};
+
+		initAuth();
 	}, []);
 
 	if (!isAppReady) return <SplashView onFinish={() => setIsAppReady(true)} />;
@@ -41,6 +62,8 @@ function RootLayout() {
 	const pathname = usePathname();
 	const { isAuthenticated } = useAuthStore();
 	const theme = useThemeColors();
+
+	console.log({ pathname });
 
 	const handleBack = () => {
 		if (pathname === '/auth/login') {
