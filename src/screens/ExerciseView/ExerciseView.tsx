@@ -8,9 +8,12 @@ import { LoadingView } from '@/components/molecules';
 import { getExercises } from '@/modules/exercise/services/exercise';
 import { getMuscles } from '@/modules/exercise/services/muscle';
 import { getEquipments } from '@/modules/exercise/services/equipment';
+import { useRoutineStore } from '@/modules/routine/store/useRoutineStore';
 
 export const ExerciseView = () => {
 	const router = useRouter();
+
+	const isSelecting = useRoutineStore((state) => state.isSelecting);
 
 	const [showModalEquipment, setShowModalEquipment] = useState(false);
 
@@ -77,7 +80,11 @@ export const ExerciseView = () => {
 				</View>
 			</View>
 
-			<ExerciseList data={dataExercises} onPress={handlePressExercise} />
+			<ExerciseList
+				data={dataExercises}
+				onPress={handlePressExercise}
+				selectable={isSelecting}
+			/>
 
 			<BottomSheetSelectList
 				title="Equipments"

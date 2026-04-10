@@ -1,26 +1,10 @@
-import React from 'react';
-// import { useRouter } from 'expo-router';
-import { Text, View } from 'react-native';
-import { BarbellIcon, PlusIcon } from 'phosphor-react-native';
-import { Button } from '@/components/atoms';
+import { KeyboardScrollViewLayout } from '@/components/templates';
+import { RoutineCreateView } from '@/screens/RoutineCreateView';
 
-export default function CreateRoutineRoute() {
-	// const router = useRouter();
+export default function RoutineCreateScreen() {
 	return (
-		<View className="flex-1 justify-center items-center gap-10 p-5">
-			<View className=" justify-center items-center gap-4">
-				<BarbellIcon size={32} color="white" />
-				<Text className="text-white">
-					Get started by adding an exercise to your routine.
-				</Text>
-			</View>
-
-			<Button
-				title="Add Exercise"
-				variant="secondary"
-				// onPress={() => router.push('/routine/create/add-exercise')}
-				iconLeft={<PlusIcon size={18} />}
-			/>
-		</View>
+		<KeyboardScrollViewLayout>
+			<RoutineCreateView />
+		</KeyboardScrollViewLayout>
 	);
 }

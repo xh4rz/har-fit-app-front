@@ -108,11 +108,11 @@ export const Input: React.FC<InputProps> = ({
 								onBlur={() => setIsFocused(false)}
 								secureTextEntry={isPassword && !showPassword}
 								className={`
-                  w-full text-base
-                  ${getVariantStyles()}
-                  ${disabled ? 'opacity-60' : 'opacity-100'}
-                  ${theme === 'dark' ? 'text-white' : 'text-gray-900'}
-                `}
+								w-full text-base
+								${getVariantStyles()}
+								${disabled ? 'opacity-60' : 'opacity-100'}
+								${theme === 'dark' ? 'text-white' : 'text-gray-900'}
+                				`}
 								placeholderTextColor={theme === 'dark' ? '#9CA3AF' : '#6B7280'}
 								{...textInputProps}
 							/>
@@ -134,9 +134,9 @@ export const Input: React.FC<InputProps> = ({
 							{variant === 'outlined' && label && (
 								<Text
 									className={`absolute top-2 left-4 text-xs font-medium
-                    ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
-                    ${error ? 'text-red-500' : ''}
-                  `}
+									${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
+									${error ? 'text-red-500' : ''}
+                 					`}
 								>
 									{label}
 									{required && (

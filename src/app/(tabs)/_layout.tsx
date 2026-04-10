@@ -6,7 +6,9 @@ import { BarbellIcon, HouseIcon, UserIcon } from 'phosphor-react-native';
 export default function TabsLayout() {
 	const pathName = usePathname();
 
-	const hideTabs = ['/routine/create'].includes(pathName);
+	const hideTabs = ['/routine/create', '/routine/create/add-exercise'].includes(
+		pathName
+	);
 
 	return (
 		<Tabs

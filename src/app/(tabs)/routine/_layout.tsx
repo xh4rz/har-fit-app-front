@@ -2,7 +2,7 @@ import { Stack } from 'expo-router';
 import { colors } from '@/constants/colors';
 import { useThemeColors } from '@/hooks';
 
-export default function TrainingLayout() {
+export default function RoutineLayout() {
 	const theme = useThemeColors();
 
 	return (
@@ -28,7 +28,18 @@ export default function TrainingLayout() {
 
 			<Stack.Screen
 				name="create/index"
-				options={{ headerShown: true, title: 'Create Rutine' }}
+				options={{
+					headerShown: true,
+					title: 'Create Rutine'
+				}}
+			/>
+
+			<Stack.Screen
+				name="create/add-exercise/index"
+				options={{
+					headerShown: true,
+					title: 'Select the exercise'
+				}}
 			/>
 		</Stack>
 	);

@@ -7,3 +7,5 @@ export * from './ExerciseInputInstructions';
 export * from './SelectField';
 export * from './ExerciseVideoUpload';
 export * from './ExerciseInstructions';
+export * from './ExerciseRoutineItem';
+export * from './ExerciseRoutineInputSets';
