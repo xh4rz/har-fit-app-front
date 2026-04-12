@@ -25,10 +25,10 @@ import {
 } from '@/modules/exercise/services/exercise';
 import { setFormError } from '@/utils';
 
-type Props = {
+interface ExerciseFormProps {
 	mode: 'create' | 'edit';
 	defaultValues?: ExerciseFormData;
-};
+}
 
 const emptyFile = {
 	uri: '',
@@ -38,7 +38,7 @@ const emptyFile = {
 	height: 0
 };
 
-export const ExerciseForm = ({ defaultValues, mode }: Props) => {
+export const ExerciseForm = ({ defaultValues, mode }: ExerciseFormProps) => {
 	const { id } = useLocalSearchParams<{ id: string }>();
 
 	const exerciseId = id as string | undefined;

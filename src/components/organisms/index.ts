@@ -7,3 +7,6 @@ export * from './BottomSheetExerciseOptions';
 export * from './DeleteExerciseModal';
 export * from './ExerciseForm';
 export * from './TabView';
+export * from './RoutineForm';
+export * from './BottomSheetRoutineOptions';
+export * from './DeleteRoutineModal';

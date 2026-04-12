@@ -1,31 +1,32 @@
 import { create } from 'zustand';
-import { Exercise } from '@/infrastructure/interfaces';
+import { RoutineExercise } from '../types/exerciseRoutine';
 
 export interface RoutineStoreState {
 	title: string;
-	exercises: Exercise[];
 	isSelecting: boolean;
-	selectedExercises: Exercise[];
+	exercises: RoutineExercise[];
+	selectedExercises: RoutineExercise[];
 	setIsSelecting: (value: boolean) => void;
 	setTitle: (title: string) => void;
-	setSelectedExercises: (exercises: Exercise[]) => void;
-	toggleExercise: (exercise: Exercise) => void;
-	clearSelected: () => void;
-	addExercises: (exercises: Exercise[]) => void;
-	removeExercise: (id: string) => void;
+	setExercises: (exercises: RoutineExercise[]) => void;
+	setSelectedExercises: (exercises: RoutineExercise[]) => void;
+	toggleExercise: (exercise: RoutineExercise) => void;
 	clearRoutine: () => void;
 	hasExercises: () => boolean;
+	isSelected: (id: string) => boolean;
 }
 
 export const useRoutineStore = create<RoutineStoreState>((set, get) => ({
 	title: '',
-	exercises: [],
 	isSelecting: false,
+	exercises: [],
 	selectedExercises: [],
 
 	setIsSelecting: (value) => set({ isSelecting: value }),
 
 	setTitle: (title) => set({ title }),
+
+	setExercises: (exercises) => set(() => ({ exercises })),
 
 	setSelectedExercises: (exercises) => set({ selectedExercises: exercises }),
 
@@ -40,18 +41,6 @@ export const useRoutineStore = create<RoutineStoreState>((set, get) => ({
 			};
 		}),
 
-	clearSelected: () => set({ selectedExercises: [] }),
-
-	addExercises: (newExercises) =>
-		set(() => ({
-			exercises: newExercises
-		})),
-
-	removeExercise: (id) =>
-		set((state) => ({
-			exercises: state.exercises.filter((e) => e.id !== id)
-		})),
-
 	clearRoutine: () =>
 		set({
 			title: '',
@@ -60,5 +49,7 @@ export const useRoutineStore = create<RoutineStoreState>((set, get) => ({
 			selectedExercises: []
 		}),
 
-	hasExercises: () => get().exercises.length > 0
+	hasExercises: () => get().exercises.length > 0,
+
+	isSelected: (id) => get().selectedExercises.some((e) => e.id === id)
 }));

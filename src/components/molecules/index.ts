@@ -9,3 +9,4 @@ export * from './ExerciseVideoUpload';
 export * from './ExerciseInstructions';
 export * from './ExerciseRoutineItem';
 export * from './ExerciseRoutineInputSets';
+export * from './RoutineCard';

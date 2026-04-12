@@ -17,13 +17,19 @@ export const ExerciseList = ({
 	selectable = false
 }: ExerciseListProps) => {
 	const router = useRouter();
-	const addExercises = useRoutineStore((state) => state.addExercises);
+	const setExercises = useRoutineStore((state) => state.setExercises);
 	const selectedExercises = useRoutineStore((state) => state.selectedExercises);
 	const toggleExercise = useRoutineStore((state) => state.toggleExercise);
+	const isSelected = useRoutineStore((state) => state.isSelected);
 
 	const handlePress = (item: Exercise) => {
 		if (selectable) {
-			toggleExercise(item);
+			toggleExercise({
+				id: item.id,
+				title: item.title,
+				video: item.video,
+				primaryMuscleName: item.primaryMuscle.name
+			});
 		} else {
 			onPress(item.id, item.title);
 		}
@@ -37,7 +43,7 @@ export const ExerciseList = ({
 				renderItem={({ item }) => (
 					<ExerciseItem
 						exercise={item}
-						isSelected={selectedExercises.some((e) => e.id === item.id)}
+						isSelected={selectable ? isSelected(item.id) : false}
 						onPress={() => handlePress(item)}
 					/>
 				)}
@@ -61,8 +67,7 @@ export const ExerciseList = ({
 					<Button
 						title={`Add Exercises (${selectedExercises.length})`}
 						onPress={() => {
-							addExercises(selectedExercises);
-
+							setExercises(selectedExercises);
 							router.dismiss();
 						}}
 					/>

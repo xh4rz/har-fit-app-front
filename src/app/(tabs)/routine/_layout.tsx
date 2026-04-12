@@ -1,9 +1,18 @@
-import { Stack } from 'expo-router';
+import { Stack, useFocusEffect } from 'expo-router';
 import { colors } from '@/constants/colors';
 import { useThemeColors } from '@/hooks';
+import { useRoutineStore } from '@/modules/routine/store/useRoutineStore';
 
 export default function RoutineLayout() {
 	const theme = useThemeColors();
+
+	const clearRoutine = useRoutineStore((state) => state.clearRoutine);
+
+	useFocusEffect(() => {
+		return () => {
+			clearRoutine();
+		};
+	});
 
 	return (
 		<Stack
@@ -39,6 +48,14 @@ export default function RoutineLayout() {
 				options={{
 					headerShown: true,
 					title: 'Select the exercise'
+				}}
+			/>
+
+			<Stack.Screen
+				name="edit/[id]"
+				options={{
+					headerShown: true,
+					title: 'Edit Routine'
 				}}
 			/>
 		</Stack>

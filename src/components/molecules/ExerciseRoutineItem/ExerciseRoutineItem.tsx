@@ -1,13 +1,13 @@
 import { View } from 'react-native';
 import { Image, Text } from '@/components/atoms';
-import { Exercise } from '@/infrastructure/interfaces';
 import { useThumbnail } from '@/hooks';
 import { RoutineFormData } from '@/modules/routine/validation/routineFormSchema';
 import { Control, FieldErrors } from 'react-hook-form';
 import { ExerciseRoutineInputSets } from '../ExerciseRoutineInputSets';
+import { RoutineExercise } from '@/modules/routine/types/exerciseRoutine';
 
 type ExerciseItemProps = {
-	exercise: Exercise;
+	exercise: RoutineExercise;
 	index: number;
 	control: Control<RoutineFormData>;
 	errors: FieldErrors<RoutineFormData>;
@@ -29,7 +29,7 @@ export const ExerciseRoutineItem = ({
 				</View>
 				<View className="flex-1 ml-2">
 					<Text className="text-primary">{exercise.title}</Text>
-					<Text className="text-white/40">{exercise.primaryMuscle.name}</Text>
+					<Text className="text-white/40">{exercise.primaryMuscleName}</Text>
 				</View>
 			</View>
 			<ExerciseRoutineInputSets

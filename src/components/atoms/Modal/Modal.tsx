@@ -3,7 +3,7 @@ import { Pressable, Modal as RNModal } from 'react-native';
 import { Text } from '../Text';
 
 interface ModalProps {
-	title: string;
+	title?: string;
 	description: string;
 	visible: boolean;
 	setVisible: (value: boolean) => void;
@@ -34,7 +34,9 @@ export const Modal = ({
 				onPress={() => setVisible(false)}
 			>
 				<Pressable className="bg-zinc-800 rounded-2xl p-6 w-full">
-					<Text className="text-lg font-bold text-center mb-2">{title}</Text>
+					{title && (
+						<Text className="text-lg font-bold text-center mb-2">{title}</Text>
+					)}
 					<Text className="text-sm text-center mb-6">
 						{description}{' '}
 						{highlight && <Text className="font-bold">{highlight}</Text>}
